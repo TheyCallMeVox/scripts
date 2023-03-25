@@ -109,6 +109,18 @@ Y.Button(
     }
 )
 Y.Toggle({
+    Text = "Auto Skills",
+    Callback = function(Value)
+        d = Value
+        while d do task.wait()
+            game:GetService("ReplicatedStorage").Remotes:FindFirstChild("Send Information"):FireServer("Slot1")
+            game:GetService("ReplicatedStorage").Remotes:FindFirstChild("Send Information"):FireServer("Slot2")
+
+        end
+	end,
+    Enabled = false
+})
+Y.Toggle({
     Text = "Auto Collect Star",
     Callback = function(Value)
         c = Value

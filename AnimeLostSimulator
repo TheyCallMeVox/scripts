@@ -13,7 +13,7 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
 
 local X = Material.Load({
     Title = "Anime Lost Simulator",
-    Style = 3,
+    Style = 2,
     SizeX = 300,
     SizeY = 350,
     Theme = "Light",
@@ -34,6 +34,9 @@ local Y = X.New({
     Title = "Main"
 })
 
+local Z = X.New({
+    Title = "LocalPlayer"
+})
 
 local Cred = X.New({
     Title = "Credits"
@@ -131,4 +134,23 @@ Y.Toggle({
     Enabled = false
 })
 
+    Z.Slider({
+	Text = "WalkSpeed",
+	Callback = function(Value)
+		getgenv().bool = Value
+	end,
+	Min = 50,
+	Max = 500,
+	Def = 50
+})
 
+    Z.Toggle({
+    Text = "Toggle WalkSpeed",
+    Callback = function(Value)
+        g = Value
+        while g do task.wait()
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = bool
+        end
+	end,
+    Enabled = false
+})

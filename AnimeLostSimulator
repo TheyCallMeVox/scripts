@@ -121,19 +121,14 @@ Y.Toggle({
     Enabled = false
 })
 Y.Toggle({
-    Text = "Auto Collect Star",
+    Text = "Auto Rebirth",
     Callback = function(Value)
-        c = Value
-        while c do task.wait()
-            pcall(function()
-                    for i, v in pairs(game:GetService("Workspace").Coins:GetChildren()) do
-                        if v:IsA("MeshPart") then
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
-                        task.wait(1)
-                    end
-                end
-            end)
+        f = Value
+        while f do task.wait()
+            game:GetService("ReplicatedStorage").Modules.LBConnection.Remotes.RebirthRem:FireServer()
         end
 	end,
     Enabled = false
 })
+
+

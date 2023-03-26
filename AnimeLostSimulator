@@ -154,3 +154,15 @@ Y.Toggle({
 	end,
     Enabled = false
 })
+Y.Toggle({
+    Text = "Auto Best Swords",
+    Callback = function(Value)
+        h = Value
+        while h do task.wait()
+            game:GetService("ReplicatedStorage").Modules.LBConnection.Remotes.EquipBest:FireServer("Swords")
+        end
+	end,
+    Enabled = false
+})
+
+

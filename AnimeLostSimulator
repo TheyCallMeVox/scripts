@@ -118,10 +118,11 @@ Y.Toggle({
         while d do task.wait()
             game:GetService("ReplicatedStorage").Remotes:FindFirstChild("Send Information"):FireServer("Slot1")
             game:GetService("ReplicatedStorage").Remotes:FindFirstChild("Send Information"):FireServer("Slot2")
-
+            task.wait(1)
         end
 	end,
     Enabled = false
+    
 })
 Y.Toggle({
     Text = "Auto Rebirth",

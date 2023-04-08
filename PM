@@ -1,0 +1,113 @@
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+local player = game.Players.LocalPlayer
+local char = player.Character
+local lp = game.Players.LocalPlayer
+
+
+local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+
+local X =
+    Material.Load(
+    {
+        Title = "PM",
+        Style = 3,
+        SizeX = 300,
+        SizeY = 350,
+        Theme = "Light",
+        ColorOverrides = {
+            MainFrame = Color3.fromRGB(0, 0, 0),
+            Toggle = Color3.fromRGB(124, 37, 255),
+            ToggleAccent = Color3.fromRGB(255, 255, 255),
+            Dropdown = Color3.fromRGB(124, 37, 255),
+            DropdownAccent = Color3.fromRGB(255, 255, 255),
+            Slider = Color3.fromRGB(124, 37, 255),
+            SliderAccent = Color3.fromRGB(255, 255, 255),
+            NavBarAccent = Color3.fromRGB(0, 0, 0),
+            Content = Color3.fromRGB(0, 0, 0)
+        }
+    }
+)
+
+local Y =
+    X.New(
+    {
+        Title = "Main"
+    }
+)
+local Cred =
+    X.New(
+    {
+        Title = "Credits"
+    }
+)
+Cred.Button(
+    {
+        Text = "Copy Discord",
+        Callback = function()
+            setclipboard("https://discord.gg/s3hYDPjuE3")
+            toclipboard("https://discord.gg/s3hYDPjuE3")
+        end
+    }
+)
+
+Y.Dropdown({
+    Text = "Select Slot",
+    Callback = function(Value)
+    getgenv().slot = Value    
+end,
+    Options = { 
+        "Slot_1",
+        "Slot_2",
+        "Slot_3",
+
+    }   
+})
+
+Y.Button(
+    {
+        Text = "Meditation Progression",
+        Callback = function()
+            Notification:Notify(
+   {Title = "Meditation Level", Description = "Your Meditation Level is".." ".. game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].MeditationProgression.Level.Value.." "..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].MeditationProgression.Exp.Value.."/"..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].MeditationProgression.MaxExp.Value},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
+   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+)
+        end
+    }
+)
+
+Y.Button(
+    {
+        Text = "Hollow Progression",
+        Callback = function()
+            Notification:Notify(
+   {Title = "Hollow Evolution", Description = "Your Hollow Evolution is".." ".. game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].HollowProgression.Evolution.Value.." "..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].HollowProgression.Exp.Value.."/"..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].MeditationProgression.MaxExp.Value},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
+   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+)
+        end
+    }
+)
+
+Y.Button(
+    {
+        Text = "Zanpakuto Progression",
+        Callback = function()
+            Notification:Notify(
+   {Title = "Zanpakuto Level", Description = "Your Zanpakuto Level is".." ".. game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].ZanpakutoProgression.Level.Value.." "..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].ZanpakutoProgression.Exp.Value.."/"..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].MeditationProgression.MaxExp.Value},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
+   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+)
+        end
+    }
+)
+
+
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)

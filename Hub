@@ -1,0 +1,9 @@
+if game.PlaceId == 12135645852 then 
+
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/TheyCallMeVox/scripts/main/AnimeCatching"))()
+    
+    elseif game.PlaceId == 12413786484 then
+    
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/TheyCallMeVox/scripts/main/AnimeLostSimulator"))()
+    
+    end

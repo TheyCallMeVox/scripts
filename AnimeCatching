@@ -1,0 +1,82 @@
+local NPCS = {}
+
+    for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+        if v.Parent:FindFirstChild("EnemyTag") and v.Parent:IsA("Model") and v.Name == "HumanoidRootPart"  then
+            if not table.find(NPCS, tostring(v.Parent.EnemyTag.NameLabel.Text)) then
+            table.insert(NPCS, tostring(v.Parent.EnemyTag.NameLabel.Text))
+        end
+    end
+end
+local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+
+local X = Material.Load({
+    Title = "Voxle",
+    Style = 2,
+    SizeX = 300,
+    SizeY = 350,
+    Theme = "Light",
+    ColorOverrides = {
+        MainFrame = Color3.fromRGB(0,0,0),
+        Toggle = Color3.fromRGB(124,37,255),
+        ToggleAccent = Color3.fromRGB(255,255,255), 
+        Dropdown = Color3.fromRGB(124,37,255),
+		DropdownAccent = Color3.fromRGB(255,255,255),
+        Slider = Color3.fromRGB(124,37,255),
+		SliderAccent = Color3.fromRGB(255,255,255),
+        NavBarAccent = Color3.fromRGB(0,0,0),
+        Content = Color3.fromRGB(0,0,0),
+    }
+})
+
+local Y = X.New({
+    Title = "Main"
+})
+
+local Z = X.New({
+    Title = "Misc"
+})
+
+local Cred = X.New({
+    Title = "Credits"
+})
+    Cred.Button({
+    Text = "Copy Discord s3hYDPjuE3",
+    Callback = function()
+        setclipboard("https://discord.gg/s3hYDPjuE3")
+        toclipboard("https://discord.gg/s3hYDPjuE3")
+    end,
+})
+
+
+
+Y.Toggle({
+    Text = "Auto Attack Nearest",
+    Callback = function(Value)
+        a0 = Value
+        while a0 do task.wait()
+            game:GetService("ReplicatedStorage").System.SystemClick.Click:FireServer()
+        end
+    end,
+    Enabled = false
+})
+
+Z.Slider({
+	Text = "WalkSpeed",
+	Callback = function(Value)
+		getgenv().bool = Value
+	end,
+	Min = 50,
+	Max = 500,
+	Def = 50
+})
+
+    Z.Toggle({
+    Text = "Toggle WalkSpeed",
+    Callback = function(Value)
+        g = Value
+        while g do task.wait()
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = bool
+        end
+	end,
+    Enabled = false
+})

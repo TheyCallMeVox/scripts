@@ -83,7 +83,7 @@ Y.Button(
         Text = "Hollow Progression",
         Callback = function()
             Notification:Notify(
-   {Title = "Hollow Evolution", Description = "Your Hollow Evolution is".." ".. game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].HollowProgression.Evolution.Value.." "..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].HollowProgression.Exp.Value.."/"..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].MeditationProgression.MaxExp.Value},
+   {Title = "Hollow Evolution", Description = "Your Hollow Evolution is".." ".. game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].HollowProgression.Evolution.Value.." "..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].HollowProgression.Exp.Value.."/"..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].HollowProgression.MaxExp.Value},
    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
    {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
 )
@@ -96,7 +96,7 @@ Y.Button(
         Text = "Zanpakuto Progression",
         Callback = function()
             Notification:Notify(
-   {Title = "Zanpakuto Level", Description = "Your Zanpakuto Level is".." ".. game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].ZanpakutoProgression.Level.Value.." "..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].ZanpakutoProgression.Exp.Value.."/"..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].MeditationProgression.MaxExp.Value},
+   {Title = "Zanpakuto Level", Description = "Your Zanpakuto Level is".." ".. game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].ZanpakutoProgression.Level.Value.." "..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].ZanpakutoProgression.Exp.Value.."/"..game:GetService("ReplicatedStorage")["Player_Datas"][game.Players.LocalPlayer.Name][slot].ZanpakutoProgression.MaxExp.Value},
    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
    {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
 )
@@ -111,3 +111,5 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
    wait(1)
    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
+
+

@@ -104,6 +104,28 @@ Y.Button(
     }
 )
 
+Y.Toggle({
+    Text = "Auto Meditation",
+    Callback = function(Value)
+        a0 = Value
+        while a0 do task.wait()
+            local args = {
+                [1] = "Meditating",
+                [2] = true
+            }
+
+            game:GetService("ReplicatedStorage").Remotes.Server.Initiate_Server:FireServer(unpack(args))
+            local args = {
+                [1] = "Apply_Meditation",
+                [2] = 1,
+                [3] = true
+            }
+            game:GetService("ReplicatedStorage").Remotes.Server.Initiate_Server:FireServer(unpack(args))
+            wait(0.1)
+        end
+    end,
+    Enabled = false
+})
 
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()

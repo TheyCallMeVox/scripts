@@ -1,0 +1,232 @@
+
+local NPC = {}
+
+for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
+    if v:IsA("MeshPart") and v:FindFirstChild("LinkedModel") then
+            if not table.find(NPC, tostring(v)) then
+            table.insert(NPC, tostring(v))
+        end
+    end
+end
+local Shrine = {}
+
+for i, v in pairs(game:GetService("Workspace").Shrines:GetChildren()) do
+    if v:IsA("Model") then
+            if not table.find(Shrine, tostring(v)) then
+            table.insert(Shrine, tostring(v))
+        end
+    end
+end
+
+
+local TweenService  = game:GetService("TweenService")
+local noclipE       = false
+local antifall      = false
+
+local function noclip()
+    for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("BasePart") and v.CanCollide == true then
+            v.CanCollide = false
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+        end
+    end
+end
+
+local function moveto(obj, speed)
+    local info = TweenInfo.new(((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - obj.Position).Magnitude)/ speed,Enum.EasingStyle.Linear)
+    local tween = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, info, {CFrame = obj})
+
+    if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+        antifall = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.HumanoidRootPart)
+        antifall.Velocity = Vector3.new(0,0,0)
+        noclipE = game:GetService("RunService").Stepped:Connect(noclip)
+        tween:Play()
+    end
+        
+    tween.Completed:Connect(function()
+        antifall:Destroy()
+        noclipE:Disconnect()
+    end)
+end
+local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+
+local X =
+    Material.Load(
+    {
+        Title = "VoxlBlade",
+        Style = 2,
+        SizeX = 300,
+        SizeY = 350,
+        Theme = "Light",
+        ColorOverrides = {
+            MainFrame = Color3.fromRGB(0, 0, 0),
+            Toggle = Color3.fromRGB(124, 37, 255),
+            ToggleAccent = Color3.fromRGB(255, 255, 255),
+            Dropdown = Color3.fromRGB(124, 37, 255),
+            DropdownAccent = Color3.fromRGB(255, 255, 255),
+            Slider = Color3.fromRGB(124, 37, 255),
+            SliderAccent = Color3.fromRGB(255, 255, 255),
+            NavBarAccent = Color3.fromRGB(0, 0, 0),
+            Content = Color3.fromRGB(0, 0, 0)
+        }
+    }
+)
+
+local Y =
+    X.New(
+    {
+        Title = "Main"
+    }
+)
+local M =
+    X.New(
+    {
+        Title = "Misc"
+    }
+)
+local Cred =
+    X.New(
+    {
+        Title = "Credits"
+    }
+)
+Cred.Button(
+    {
+        Text = "Copy Discord",
+        Callback = function()
+            setclipboard("https://discord.gg/s3hYDPjuE3")
+            toclipboard("https://discord.gg/s3hYDPjuE3")
+        end
+    }
+)
+
+
+
+
+
+
+local function getNPCclose()
+    local dist, thing = math.huge
+    for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
+        if v:IsA("MeshPart")  then
+            local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+
+Y.Toggle({
+    Text = "Auto Mob Nearby",
+    Callback = function(Value)
+        b = Value
+        while b do task.wait()
+                    pcall(function()
+                        moveto(getNPCclose().CFrame + Vector3.new(0,-5,0),50)
+                        local args = {
+                            [1] = "L"
+                        }
+
+                        game:GetService("ReplicatedStorage").Events.SwingSword:FireServer(unpack(args))
+                        game:GetService("ReplicatedStorage").Events.WeaponArt:FireServer()
+
+            end)
+        end
+	end,
+    Enabled = false
+})
+
+Y.Toggle({
+    Text = "Auto Equip Weapon When Dead",
+    Callback = function(Value)
+        c = Value
+        while c do task.wait()
+
+if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+    task.wait(3)
+    game:GetService("ReplicatedStorage").Events.EquipWeapon:InvokeServer()
+end
+        end
+	end,
+    Enabled = false
+})
+
+
+
+    M.Dropdown({
+    Text = "Select Shrine",
+    Callback = function(Value)
+        getgenv().shrinename = Value
+end,
+    Options = Shrine
+})
+
+M.Button(
+    {
+        Text = "To Shrine",
+        Callback = function()
+            moveto(game:GetService("Workspace").Shrines[shrinename][shrinename].CFrame + Vector3.new(0,0,0),50)
+        end
+    }
+)
+local ii = M.Dropdown({
+    Text = "Select Mob",
+    Callback = function(Value)
+        getgenv().mobname = Value
+end,
+    Options = NPC
+})
+
+local function getNPC()
+    local dist, thing = math.huge
+    for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
+        if v:IsA("MeshPart") and v.Name == mobname then
+            local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+
+M.Button(
+    {
+        Text = "To Mob",
+        Callback = function()
+            moveto(getNPC().CFrame + Vector3.new(0,0,0),50)
+        end
+    }
+)
+
+M.Button(
+    {
+        Text = "Refresh Mobs",
+        Callback = function()
+            table.clear(NPC)
+            for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
+                if v:IsA("MeshPart") then
+                        if not table.find(NPC, tostring(v)) then
+                        table.insert(NPC, tostring(v))
+                        ii:SetOptions(NPC)
+                    end
+                end
+            end
+        end
+    }
+)
+
+M.Toggle({
+    Text = "Increase WalkSpeed",
+    Callback = function(Value)
+        b1 = Value
+        while b1 do task.wait()
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50
+        end
+	end,
+    Enabled = false
+})

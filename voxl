@@ -3,7 +3,6 @@ for i, v in pairs(game:GetService("Workspace").NPCS:GetDescendants()) do
         v.Name = "Boss"
     end
 end
-        v.Name = "Boss"
 local NPC = {}
 
 for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do

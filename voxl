@@ -3,8 +3,8 @@ local NPC = {}
 
 for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
     if v:IsA("MeshPart") and v:FindFirstChild("LinkedModel") then
-            if not table.find(NPC, tostring(v)) then
-            table.insert(NPC, tostring(v))
+            if not table.find(NPC, tostring(v.LinkedModel.Head.Boss.TextLabel.Text)) then
+            table.insert(NPC, tostring(v.LinkedModel.Head.Boss.TextLabel.Text))
         end
     end
 end
@@ -105,10 +105,18 @@ Cred.Button(
 
 
 
-local function getNPCclose()
+local ii = Y.Dropdown({
+    Text = "Select Mob",
+    Callback = function(Value)
+        getgenv().mobname = Value
+end,
+    Options = NPC
+})
+
+local function getNPC()
     local dist, thing = math.huge
     for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
-        if v:IsA("MeshPart")  then
+        if v:IsA("MeshPart") and v:FindFirstChild("LinkedModel")  and v.LinkedModel.Head.Boss.TextLabel.Text == mobname then
             local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
             if mag < dist then
                 dist = mag
@@ -119,13 +127,31 @@ local function getNPCclose()
     return thing
 end
 
+
+Y.Button(
+    {
+        Text = "Refresh Mobs",
+        Callback = function()
+            table.clear(NPC)
+            for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
+                if v:IsA("MeshPart") and v:FindFirstChild("LinkedModel") then
+                        if not table.find(NPC, tostring(v.LinkedModel.Head.Boss.TextLabel.Text)) then
+                        table.insert(NPC, tostring(v.LinkedModel.Head.Boss.TextLabel.Text))
+                        ii:SetOptions(NPC)
+                    end
+                end
+            end
+        end
+    }
+)
+
 Y.Toggle({
-    Text = "Auto Mob Nearby",
+    Text = "Auto Mob",
     Callback = function(Value)
         b = Value
         while b do task.wait()
                     pcall(function()
-                        moveto(getNPCclose().CFrame + Vector3.new(0,-5,0),50)
+                        moveto(getNPC().CFrame + Vector3.new(0,-5,0),50)
                         local args = {
                             [1] = "L"
                         }
@@ -172,53 +198,7 @@ M.Button(
         end
     }
 )
-local ii = M.Dropdown({
-    Text = "Select Mob",
-    Callback = function(Value)
-        getgenv().mobname = Value
-end,
-    Options = NPC
-})
 
-local function getNPC()
-    local dist, thing = math.huge
-    for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
-        if v:IsA("MeshPart") and v.Name == mobname then
-            local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
-            if mag < dist then
-                dist = mag
-                thing = v
-            end
-        end
-    end
-    return thing
-end
-
-M.Button(
-    {
-        Text = "To Mob",
-        Callback = function()
-            moveto(getNPC().CFrame + Vector3.new(0,0,0),50)
-        end
-    }
-)
-
-M.Button(
-    {
-        Text = "Refresh Mobs",
-        Callback = function()
-            table.clear(NPC)
-            for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
-                if v:IsA("MeshPart") then
-                        if not table.find(NPC, tostring(v)) then
-                        table.insert(NPC, tostring(v))
-                        ii:SetOptions(NPC)
-                    end
-                end
-            end
-        end
-    }
-)
 
 M.Toggle({
     Text = "Increase WalkSpeed",
@@ -230,3 +210,13 @@ M.Toggle({
 	end,
     Enabled = false
 })
+
+aaaa = true
+while aaaa == true do task.wait()
+    for i, v in pairs(game:GetService("Workspace").NPCS:GetDescendants()) do
+    if v:IsA("BillboardGui") and v.Name == "Name" then
+        v.Name = "Boss"
+        
+    end
+    end
+    end

@@ -3,6 +3,15 @@ for i, v in pairs(game:GetService("Workspace").NPCS:GetDescendants()) do
         v.Name = "Boss"
     end
 end
+local ZONE = {}
+
+for i, v in pairs(game:GetService("ReplicatedStorage").MusicZone:GetChildren()) do
+    if v.Parent.Name == "MusicZone" then
+            if not table.find(ZONE, tostring(v)) then
+            table.insert(ZONE, tostring(v))
+        end
+    end
+end
 local NPC = {}
 
 for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
@@ -193,6 +202,23 @@ M.Toggle({
 	end,
     Enabled = false
 })
+
+M.Dropdown({
+    Text = "Select Zone",
+    Callback = function(Value)
+        getgenv().zonename = Value
+end,
+    Options = ZONE
+})
+
+M.Button(
+    {
+        Text = "To Zone",
+        Callback = function()
+            moveto(game:GetService("ReplicatedStorage").MusicZone[zonename].CFrame + Vector3.new(0,0,0),50)
+        end
+    }
+)
 
     M.Dropdown({
     Text = "Select Shrine",

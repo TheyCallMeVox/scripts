@@ -155,7 +155,7 @@ Y.Toggle({
         b = Value
         while b do task.wait()
                     pcall(function()
-                        moveto(getNPC().CFrame + Vector3.new(0,0,3),50)
+                        moveto(getNPC().CFrame * CFrame.new(0,0,5),50)
                         local args = {
                             [1] = "L"
                         }

@@ -289,14 +289,13 @@ M.Button(
         Text = "To Dungeon",
         Callback = function()
             if dungeonename == "Frogg Dungeon" then
-            moveto(game:GetService("Workspace").Others.BeeDungeon.CFrame + Vector3.new(0,0,0),50)
+            moveto(game:GetService("Workspace").Others.FroggDungeon.CFrame + Vector3.new(0,0,0),50)
             elseif dungeonename == "Frogg Dungeon" then
                 moveto(game:GetService("Workspace").Others.BeeDungeon.CFrame + Vector3.new(0,0,0),50)
             end
         end
     }
 )
-
 
 
 aaaa = true

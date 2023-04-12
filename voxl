@@ -183,8 +183,16 @@ end
 	end,
     Enabled = false
 })
-
-
+M.Toggle({
+    Text = "Increase WalkSpeed",
+    Callback = function(Value)
+        b1 = Value
+        while b1 do task.wait()
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50
+        end
+	end,
+    Enabled = false
+})
 
     M.Dropdown({
     Text = "Select Shrine",
@@ -203,17 +211,67 @@ M.Button(
     }
 )
 
-
-M.Toggle({
-    Text = "Increase WalkSpeed",
+M.Dropdown({
+    Text = "Select Guild",
     Callback = function(Value)
-        b1 = Value
-        while b1 do task.wait()
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50
-        end
-	end,
-    Enabled = false
+        getgenv().guildname = Value
+end,
+    Options = {"Mage","Hex","Knight","Monk","Thief","Gladiator","Cleric"}
+
 })
+
+M.Button(
+    {
+        Text = "To Guild",
+        Callback = function()
+            if guildname == "Mage" then
+            moveto(game:GetService("Workspace").Interactables.Lapis.CFrame + Vector3.new(0,0,0),50)
+
+            elseif guildname == "Hex" then
+                moveto(game:GetService("Workspace").Interactables.DeadISlayer.CFrame + Vector3.new(0,0,0),50)
+
+            elseif guildname == "Knight" then
+                moveto(game:GetService("Workspace").Interactables.Talon.CFrame + Vector3.new(0,0,0),50)
+
+            elseif guildname == "Monk" then
+                moveto(game:GetService("Workspace").Interactables.Gong.CFrame + Vector3.new(0,0,0),50)
+
+            elseif guildname == "Thief" then
+                moveto(game:GetService("Workspace").Interactables.Robert.CFrame + Vector3.new(0,0,0),50)
+
+            elseif guildname == "Gladiator" then
+                moveto(game:GetService("Workspace").Interactables.Pickles.CFrame + Vector3.new(0,0,0),50)
+
+            elseif guildname == "Cleric" then
+                moveto(game:GetService("Workspace").Interactables.Topez.CFrame + Vector3.new(0,0,0),50)
+
+            end
+        end
+    }
+)
+
+M.Dropdown({
+    Text = "Select Dungeon",
+    Callback = function(Value)
+        getgenv().dungeonename = Value
+end,
+    Options = {"Frogg Dungeon","Bee Dungeon"}
+})
+
+M.Button(
+    {
+        Text = "To Dungeon",
+        Callback = function()
+            if dungeonename == "Frogg Dungeon" then
+            moveto(game:GetService("Workspace").Others.BeeDungeon.CFrame + Vector3.new(0,0,0),50)
+            elseif dungeonename == "Frogg Dungeon" then
+                moveto(game:GetService("Workspace").Others.BeeDungeon.CFrame + Vector3.new(0,0,0),50)
+            end
+        end
+    }
+)
+
+
 
 aaaa = true
 while aaaa == true do task.wait()

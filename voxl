@@ -140,6 +140,20 @@ local function getNPC()
     return thing
 end
 
+local function getnearNPC()
+    local dist, thing = math.huge
+    for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
+        if v:IsA("MeshPart") and v:FindFirstChild("LinkedModel")   then
+            local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+
 
 Y.Button(
     {
@@ -165,6 +179,26 @@ Y.Toggle({
         while b do task.wait()
                     pcall(function()
                         moveto(getNPC().CFrame * CFrame.new(0,0,5),50)
+                        local args = {
+                            [1] = "L"
+                        }
+
+                        game:GetService("ReplicatedStorage").Events.SwingSword:FireServer(unpack(args))
+                        game:GetService("ReplicatedStorage").Events.WeaponArt:FireServer()
+
+            end)
+        end
+	end,
+    Enabled = false
+})
+
+Y.Toggle({
+    Text = "Mob Aura",
+    Callback = function(Value)
+        h = Value
+        while h do task.wait()
+                    pcall(function()
+                        moveto(getnearNPC().CFrame * CFrame.new(0,0,5),50)
                         local args = {
                             [1] = "L"
                         }

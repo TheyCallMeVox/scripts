@@ -198,13 +198,15 @@ Y.Toggle({
         h = Value
         while h do task.wait()
                     pcall(function()
-                        moveto(getnearNPC().CFrame * CFrame.new(0,0,5),50)
+                        moveto(getnearNPC().CFrame * CFrame.new(0,0,10),50)
                         local args = {
                             [1] = "L"
                         }
 
                         game:GetService("ReplicatedStorage").Events.SwingSword:FireServer(unpack(args))
                         game:GetService("ReplicatedStorage").Events.WeaponArt:FireServer()
+                        game:GetService("ReplicatedStorage").Events.Rune:FireServer()
+
 
             end)
         end

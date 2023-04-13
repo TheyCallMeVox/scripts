@@ -240,6 +240,21 @@ end
 	end,
     Enabled = false
 })
+M.Button(
+    {
+        Text = "To Snailsman",
+        Callback = function()
+            moveto(game:GetService("Workspace").Map.Stand.Snailsman.CFrame + Vector3.new(0,0,0),50)
+        end,
+        Menu = {
+            Information = function(self)
+                X.Banner({
+                    Text = "Only works if Snailsman is spawned"
+                })
+            end
+        }
+    }
+)
 M.Toggle({
     Text = "Increase WalkSpeed",
     Callback = function(Value)

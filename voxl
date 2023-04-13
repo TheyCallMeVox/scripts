@@ -180,7 +180,7 @@ Y.Slider({
 		getgenv().range = Value
 	end,
 	Min = 1,
-	Max = 15,
+	Max = 20,
 	Def = 1
 })
 

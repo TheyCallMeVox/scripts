@@ -143,6 +143,20 @@ local function getNPC()
     return thing
 end
 
+local function getTOAD()
+    local dist, thing = math.huge
+    for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
+        if v:IsA("MeshPart") and v:FindFirstChild("LinkedModel")  and v.LinkedModel.Head.Boss.TextLabel.Text == "Toadzerker" or v.LinkedModel.Head.Boss.TextLabel.Text == "Bulfrogg" then
+            local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+
 local function getnearNPC()
     local dist, thing = math.huge
     for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
@@ -226,6 +240,7 @@ Y.Toggle({
     Enabled = false
 })
 
+
 Y.Toggle({
     Text = "Auto Equip Weapon When Dead",
     Callback = function(Value)
@@ -296,6 +311,27 @@ M.Button(
         Text = "To Shrine",
         Callback = function()
             moveto(game:GetService("Workspace").Shrines[shrinename][shrinename].CFrame + Vector3.new(0,0,0),50)
+        end
+    }
+)
+
+M.Dropdown({
+    Text = "Select Infuser",
+    Callback = function(Value)
+        getgenv().inname = Value
+end,
+    Options = {
+        "Helmet",
+        "Pants",
+        "Shirt"
+    }
+})
+
+M.Button(
+    {
+        Text = "To Infuser",
+        Callback = function()
+            moveto(game:GetService("Workspace").Infusers[inname].Union.CFrame + Vector3.new(0,0,0),50)
         end
     }
 )

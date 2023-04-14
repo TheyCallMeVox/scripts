@@ -21,6 +21,7 @@ for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
         end
     end
 end
+
 local Shrine = {}
 
 for i, v in pairs(game:GetService("Workspace").Shrines:GetChildren()) do
@@ -128,7 +129,6 @@ end,
 
 
 
-
 local function getNPC()
     local dist, thing = math.huge
     for i, v in pairs(game:GetService("Workspace").NPCS:GetChildren()) do
@@ -217,6 +217,8 @@ Y.Toggle({
 	end,
     Enabled = false
 })
+
+
 
 Y.Toggle({
     Text = "Mob Aura",
@@ -389,7 +391,7 @@ M.Button(
         Callback = function()
             if dungeonename == "Frogg Dungeon" then
             moveto(game:GetService("Workspace").Others.FroggDungeon.CFrame + Vector3.new(0,0,0),50)
-            elseif dungeonename == "Frogg Dungeon" then
+            elseif dungeonename == "Bee Dungeon" then
                 moveto(game:GetService("Workspace").Others.BeeDungeon.CFrame + Vector3.new(0,0,0),50)
             end
         end

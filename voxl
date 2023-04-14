@@ -403,7 +403,7 @@ M.Dropdown({
     Callback = function(Value)
         getgenv().dungeonename = Value
 end,
-    Options = {"flower rift","vinelands rift"}
+    Options = {"flower rift","vinelands rift","ice rift"}
 })
 
 M.Button(
@@ -411,9 +411,20 @@ M.Button(
         Text = "To Voidrift",
         Callback = function()
             if dungeonename == "vinelands rift" then
-            moveto(game:GetService("Workspace").Interactables.VoidRift.VoidRift2.CFrame + Vector3.new(0,0,0),50)
+                for i, v in pairs(game:GetService("Workspace").Interactables:GetDescendants()) do
+                    if v.Name == "VoidRift2" then
+            moveto(v.CFrame + Vector3.new(0,0,0),50)
+        end
+    end
+            elseif dungeonename == "vinelands rift" then
+                for i, v in pairs(game:GetService("Workspace").Interactables:GetDescendants()) do
+                    if v.Name == "VoidRift3" then
+            moveto(v.CFrame + Vector3.new(0,0,0),50)
+        end
+end
             elseif dungeonename == "flower rift" then
                 moveto(game:GetService("Workspace").Interactables.VoidRift.VoidRift1.CFrame + Vector3.new(0,0,0),50)
+
             end
         end
     }

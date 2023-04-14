@@ -398,6 +398,27 @@ M.Button(
     }
 )
 
+M.Dropdown({
+    Text = "Select Voidrift",
+    Callback = function(Value)
+        getgenv().dungeonename = Value
+end,
+    Options = {"flower rift","vinelands rift"}
+})
+
+M.Button(
+    {
+        Text = "To Voidrift",
+        Callback = function()
+            if dungeonename == "vinelands rift" then
+            moveto(game:GetService("Workspace").Interactables.VoidRift.VoidRift2.CFrame + Vector3.new(0,0,0),50)
+            elseif dungeonename == "flower rift" then
+                moveto(game:GetService("Workspace").Interactables.VoidRift.VoidRift1.CFrame + Vector3.new(0,0,0),50)
+            end
+        end
+    }
+)
+
 
 aaaa = true
 while aaaa == true do task.wait()
